@@ -48,7 +48,7 @@ const persistentConfig = {
   grblWaitResponse: 1, // timeout for a response from Ctrl+X
   grblWaitReboot: 2, // timeout for bootloader to reboot after DTR toggle. this may have to be a large number for FluidNC, which takes a long time to start up
   spindleDelay: 0,
-  enableUpdates: true,
+  enableUpdates: false, // PCB-Control: keine Update-Suche bei GrooveControl ohne Zustimmung
   forceDevMode: false,
 };
 
@@ -184,7 +184,7 @@ const status = {
     trayIcon: true,
     trayIconStyle: "light",
     autoStart: true,
-    enableUpdates: true,
+    enableUpdates: false,
     lastFilePath: "",
     spindleDelay: 0,
     laserMode: false,

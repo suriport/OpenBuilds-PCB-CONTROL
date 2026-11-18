@@ -1,6 +1,6 @@
 {
-    "name": "Groove Control Jog",
-    "short_name": "Groove Control Jog",
+    "name": "PCB-Control Jog",
+    "short_name": "PCB-Control Jog",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

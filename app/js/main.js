@@ -16,7 +16,7 @@ document.addEventListener('contextmenu', function(e) {
 }, false);
 
 function setWindowTitle(status) {
-  let string = "Groove Control";
+  let string = "PCB-Control";
 
   status = status || laststatus;
   if (status) {
