@@ -8,6 +8,8 @@ import express from 'express';
 import path from 'path';
 import ip from 'ip';
 import http from 'http';
+import crypto from 'crypto';
+import net from 'net';
 // import https from 'https';
 
 
@@ -20,9 +22,93 @@ import {
 } from './core.js';
 
 
+// PCB-Control: Zugriffsschutz gegen fremde Webseiten im Browser
+// Erlaubt sind nur Anfragen an eine lokale Adresse (localhost, IP, Rechnername, *.local), die entweder
+// - den Sitzungsschlüssel mitbringen (das App-Fenster, das von file:// geladen wird), oder
+// - von genau dieser Adresse stammen (mobile Jog-Oberfläche im Browser) bzw. keine Herkunft senden (z. B. curl).
+const sessionToken = crypto.randomBytes(32).toString('hex'); // neu bei jedem Programmstart, wird nicht gespeichert
+
+function getSessionToken() {
+  return sessionToken;
+}
+
+function isAllowedHost(hostHeader) {
+  if (!hostHeader) {
+    return false;
+  }
+  let hostname;
+  try {
+    hostname = new URL('http://' + hostHeader).hostname.toLowerCase();
+  } catch {
+    return false;
+  }
+  hostname = hostname.replace(/^\[/, '').replace(/\]$/, ''); // IPv6 [::1] -> ::1
+  if (hostname === 'localhost' || hostname.endsWith('.local')) {
+    return true;
+  }
+  if (net.isIP(hostname)) {
+    return true;
+  }
+  return hostname.indexOf('.') === -1; // Rechnername ohne Domain
+}
+
+function hasValidToken(req) {
+  let token;
+  try {
+    token = new URL(req.url, 'http://localhost').searchParams.get('token');
+  } catch {
+    return false;
+  }
+  if (!token || token.length !== sessionToken.length) {
+    return false;
+  }
+  return crypto.timingSafeEqual(Buffer.from(token), Buffer.from(sessionToken));
+}
+
+function isSameOrigin(req) {
+  const origin = req.headers.origin;
+  if (origin === undefined) {
+    return true;
+  }
+  try {
+    return new URL(origin).host.toLowerCase() === req.headers.host.toLowerCase();
+  } catch {
+    return false; // z. B. Origin "null"
+  }
+}
+
+function isTrustedRequest(req) {
+  return isAllowedHost(req.headers.host) && (hasValidToken(req) || isSameOrigin(req));
+}
+
+function checkRequestOrigin(req, res, next) {
+  const isReadOnly = (req.method === 'GET' || req.method === 'HEAD');
+  if (!isAllowedHost(req.headers.host) || (!isReadOnly && !isTrustedRequest(req))) {
+    debug_log('Blocked request: ' + req.method + ' ' + req.path + ' Host: ' + req.headers.host + ' Origin: ' + req.headers.origin);
+    return res.status(403).send('Forbidden');
+  }
+  if (req.headers.origin !== undefined && hasValidToken(req)) {
+    // das App-Fenster (file://) darf die Antwort lesen
+    res.set('Access-Control-Allow-Origin', req.headers.origin);
+  }
+  next();
+}
+
 // Global variables
-const io = new ioServer();
+const io = new ioServer({
+  // Verbindungsaufbau nur vom App-Fenster (Schlüssel) oder von der eigenen Adresse
+  allowRequest: function(req, callback) {
+    const allowed = isTrustedRequest(req);
+    if (!allowed) {
+      debug_log('Blocked Socket.IO connection: Host: ' + req.headers.host + ' Origin: ' + req.headers.origin);
+    }
+    callback(null, allowed);
+  }
+});
 const app = express();
+// PCB-Control: die Prüfung muss als Erstes registriert werden, weil andere Module (files.js, grblSender.js)
+// ihre Endpunkte schon vor initServer() anlegen und Express in Registrierungsreihenfolge arbeitet
+app.use(checkRequestOrigin);
 var httpServer;
 var connectionHandlers = [];
 var docReadyHandlers = [];
@@ -84,18 +170,6 @@ function httpServerError(error) {
 function initServer() {
   app.use(express.static(path.join(rootDir, "app")));
 
-  app.use(function setCommonHeaders(req, res, next) {
-    res.set("Access-Control-Allow-Private-Network", "true");
-    next();
-  });
-
-  app.all('/*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header("Access-Control-Allow-Private-Network", "true");
-    next();
-  });
-
   httpServer = http.Server(app).listen(config.webPort, '0.0.0.0', httpServerSuccess).on('error', httpServerError);
   io.attach(httpServer);
 
@@ -132,6 +206,7 @@ function serverEmitOutput(data) {
 
 export {
   app,
+  getSessionToken,
   serverEmit,
   serverEmitOutput,
   addConnectionHandler,
