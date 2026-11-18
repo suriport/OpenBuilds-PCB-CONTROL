@@ -94,7 +94,9 @@ function openFileDialog(data, callback) {
 
   dialog.showOpenDialog(jogWindowAPI.getJogWindow(), {
     title: data.title,
-    filters: data.filters,
+    // PCB-Control: Unter macOS findet die Suche im Dialog mit Dateifiltern keine Dateien (z. B. *.nc),
+    // daher dort ohne Filter öffnen – wie im Original OpenBuilds CONTROL
+    filters: process.platform === 'darwin' ? undefined : data.filters,
     defaultPath: defaultPath,
     properties: ['openFile']
   }).then((result) => {
