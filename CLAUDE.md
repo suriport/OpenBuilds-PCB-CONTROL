@@ -65,7 +65,9 @@ Von oben nach unten in `app/main.html`:
   (Set Zero, Goto, Probe); dazu **Koordinatensystem-Knopf** (`#wcsBtn`, G54–G59) und **WCS/MCS-Umschalter** (`#mcsBtn`).
 - **Jog-Bereich** (`#jogcell`): **Pfeiltasten**, **Schrittweite** (0.1/1/10/100 mm), **Jog-Modus**
   (Incremental/Continuous), Jog-**Stop**, **Override-Regler** (Jog-, Feed-, Spindle-Override: `#jro`, `#fro`, `#tro`).
-- **Arbeitsbereich** (`#controlLogs`) mit den Reitern **3D View**, **Console**, **Macros**, **G-code Editor**.
+- **Arbeitsbereich** (`#controlLogs`) mit den Reitern **3D View**, **Console**, **Macros**, **G-code Editor**
+  und (nur wenn in Settings → **Hardware** eingeschaltet) **Cam** (`#tab-cam`, `app/js/pcb/camera.js`):
+  Kamerabild mit Fadenkreuz, Drehen, Spiegeln, Zoom und **Set Cam Zero X/Y**.
 - **Statusleiste**: Verbindungs-/Maschinenzustand (`#connectStatus`, `#runStatus`), Job Queue, **Fortschrittsbalken**, Restzeit.
 - **Assistenten**: Dialogfenster über allem (Probe-, Höhenkarten-, Planfräs-Assistent usw.).
 - **Grbl-Settings-Ansicht** (`#grblPanel`) / **Troubleshooting-Ansicht** (`#troubleshootingPanel`) ersetzen

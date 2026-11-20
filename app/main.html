@@ -997,6 +997,8 @@ Restore previous origins from history.">
                   <li><a href="#tab-one" id="consoletab"><i class="fas fa-fw fa-terminal fg-darkGreen"></i> Console</a></li>
                   <li><a href="#tab-four" id="macrostab"><i class="fas fa-th fa-fw fg-darkOrange"></i> Macros</a></li>
                   <li><a href="#tab-two" id="gcodeeditortab"><i class="far fa-fw fa-edit fg-darkLime"></i> G-code Editor</a></li>
+                  <li style="display:none;"><a href="#tab-cam" id="cameratab"><i class="fas fa-fw fa-video fg-cyan"></i> Cam</a></li> <!-- PCB-Control -->
+
                 </ul>
                 <div class="content-holder" id="mainTabHolder" style="flex-grow:1; min-height:0;">
                   <div class="section" id="tab-one" style="height:100%; flex-direction:column;">
@@ -1175,6 +1177,33 @@ Restore previous origins from history.">
                           </ul>
                         </div>
                       </div>
+                    </div>
+                  </div>
+
+                  <!-- PCB-Control: camera image (app/js/pcb/camera.js) -->
+                  <div class="section" id="tab-cam" style="height:100%; position:relative;">
+                    <div id="pcbCamArea" style="position:absolute; inset:0; overflow:hidden;">
+                      <video id="pcbCamVideo" muted playsinline style="position:absolute; left:50%; top:50%; transform-origin:center center;"></video>
+                      <svg id="pcbCamCrosshair" width="100%" height="100%" style="position:absolute; inset:0; pointer-events:none;">
+                        <line x1="50%" y1="0" x2="50%" y2="100%" stroke="#ff3030" stroke-width="1"/>
+                        <line x1="0" y1="50%" x2="100%" y2="50%" stroke="#ff3030" stroke-width="1"/>
+                        <circle cx="50%" cy="50%" r="20" fill="none" stroke="#ff3030" stroke-width="1"/>
+                      </svg>
+                      <div id="pcbCamMessage" style="display:none; position:absolute; left:0; right:0; top:45%; text-align:center; padding:0 20px;"></div>
+                    </div>
+                    <div class="toolbar no-divider" style="position:absolute; padding:0px; margin:6px;">
+                      <button id="pcbCamCrosshairBtn" title="Crosshair on/off" class="button dark" onclick="pcbCamToggleCrosshair()"><i class="fas fa-crosshairs"></i></button>
+                      <button title="Rotate 90°" class="button dark" onclick="pcbCamRotate()"><i class="fas fa-redo"></i></button>
+                      <button id="pcbCamFlipHBtn" title="Mirror horizontally" class="button dark" onclick="pcbCamFlip(true)"><i class="fas fa-arrows-alt-h"></i></button>
+                      <button id="pcbCamFlipVBtn" title="Mirror vertically" class="button dark" onclick="pcbCamFlip(false)"><i class="fas fa-arrows-alt-v"></i></button>
+                      <button title="Zoom out" class="button dark" onclick="pcbCamSetZoom(pcbCamera.view.zoom / 1.25)"><i class="fas fa-search-minus"></i></button>
+                      <button id="pcbCamZoomLabel" title="Reset zoom to 1x" class="button dark" style="min-width:52px;" onclick="pcbCamSetZoom(1)">1.0x</button>
+                      <button title="Zoom in (or use the mouse wheel)" class="button dark" onclick="pcbCamSetZoom(pcbCamera.view.zoom * 1.25)"><i class="fas fa-search-plus"></i></button>
+                    </div>
+                    <div style="position:absolute; top:52px; left:6px; display:flex; flex-direction:column; gap:4px;">
+                      <!-- the title sits on the wrapper, so the tooltip also shows while the button is disabled -->
+                      <span id="pcbCamZeroXWrap"><button id="pcbCamZeroXBtn" class="button dark" style="width:100%; text-align:left;" onclick="pcbCamSetZero('x')"><i class="fas fa-crosshairs"></i> Set Cam Zero X</button></span>
+                      <span id="pcbCamZeroYWrap"><button id="pcbCamZeroYBtn" class="button dark" style="width:100%; text-align:left;" onclick="pcbCamSetZero('y')"><i class="fas fa-crosshairs"></i> Set Cam Zero Y</button></span>
                     </div>
                   </div>
                 </div>
@@ -1774,6 +1803,7 @@ Restore previous origins from history.">
 
   <script type="text/javascript" src="./js/theme.js"></script>
 
+  <script type="text/javascript" src="./js/pcb/camera.js"></script> <!-- PCB-Control: before settings.js -->
   <script type="text/javascript" src="./js/settings.js"></script>
 
   <script type="text/javascript" src="./lib/qrcode/qrcode.min.js"></script>

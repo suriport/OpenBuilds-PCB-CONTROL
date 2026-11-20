@@ -60,6 +60,7 @@ const appSettingsDlg = `
   <li><a id="keyboardSettingsTab" href="#keyboardSettings" style="font-size:14px;"><i class="fas fa-keyboard"></i> Keyboard</a></li>
 <!--  <li><a id="gamepadSettingsTab" href="#gamepadSettings" style="font-size:14px;"><i class="fas fa-gamepad"></i> Gamepad</a></li> -->
   <li><a id="rotarySettingsTab" href="#rotarySettings" style="font-size:14px;"><i class="fab fa-ubuntu"></i> Rotary</a></li>
+  ${window.pcbHardwareSettingsTab || ''}<!-- PCB-Control: app/js/pcb/camera.js -->
 <!--  <li><a id="toolchangeSettingsTab" href="#toolchangeSettings" style="font-size:14px;"><i class="fas fa-tools"></i> Toolchange</a></li> -->
 </ul>
 <div class="content-holder" style="background-color:inherit;">
@@ -202,6 +203,8 @@ The animation is smoother at the expense of some accuracy and a small lag of aro
 <!--<div class="section" id="toolchangeSettings" style="height:500px; flex-direction:column; border-bottom:0px;">
 </div> -->
 
+${window.pcbHardwareSettingsSection || ''}<!-- PCB-Control: app/js/pcb/camera.js -->
+
 </div>
 </nav>`;
 
@@ -253,6 +256,8 @@ function applyAppSettings() {
 
   applyKeyboardSettings();
   updateButtonTooltips();
+
+  if (window.pcbApplyHardwareSettings) pcbApplyHardwareSettings(); // PCB-Control: camera settings
 
   if (reload) {
     reloadPage();
@@ -330,6 +335,8 @@ function showAppSettings(category) {
   $('#disable4thAxisCheck').prop('checked', disable4thAxis);
 
   initKeyboardEditor();
+
+  if (window.pcbShowHardwareSettings) pcbShowHardwareSettings(); // PCB-Control: camera settings
 
   if (category) {
     const tab = $('#' + category + "SettingsTab");
