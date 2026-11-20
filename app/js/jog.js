@@ -19,7 +19,29 @@ var jogdistXYZ = 10;
 var jogdistA = 10;
 var unit = "mm";
 
+var lastValidJogOverride = null; // PCB-Control: last accepted jog override in %
+
 function jogOverride(newVal, temp) {
+  // PCB-Control: reject invalid values. The slider once stored "undefined", which made every jog
+  // command "F NaN" (Grbl error 2). An invalid stored value at startup falls back to 100 %
+  // (same as a fresh install or the "reset" button); an invalid value later is ignored and the
+  // previous jog rate is kept.
+  const parsedVal = parseFloat(newVal);
+  if (!isFinite(parsedVal) || parsedVal < 1 || parsedVal > 100) {
+    console.warn('jogOverride: invalid value ' + newVal + ' ignored');
+    if (lastValidJogOverride === null) {
+      newVal = 100;
+    } else {
+      if (!temp && $('#jro').data('slider')) {
+        $('#jro').data('slider').val(lastValidJogOverride);
+      }
+      return;
+    }
+  } else {
+    newVal = parsedVal;
+  }
+  lastValidJogOverride = newVal;
+
   if (laststatus && laststatus.comms.connectionStatus > 0) {
     jogRate.x = 4000;
     jogRate.y = 4000;
