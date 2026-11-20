@@ -52,6 +52,28 @@ sie läuft daher auch im Browser auf anderen Geräten im Netz.
 - `app/js/heightmap/heightmap.js` – Höhenkarte: Antasten im Raster (`G38.2`) und Anpassen der Z-Werte im G-Code.
 - `app/js/probe/`, `surfacing/`, `calibration/`, `resume/` – Assistenten.
 
+### Namen der UI-Bereiche (gemeinsame Sprache mit dem Nutzer)
+
+Grundregel: Wo die UI eine Beschriftung hat, genau diese (englisch) verwenden; sonst die deutschen Namen unten.
+Von oben nach unten in `app/main.html`:
+
+- **Titelleiste** (`#windowtitlebar`)
+- **Menüband** (Ribbon) mit den Reitern **Machine Control**, **Grbl Settings**, **Help & Troubleshooting**;
+  Knöpfe werden mit ihrer **Gruppe** benannt, z. B. „Menüband → Control → Pause Job“.
+  Gruppen auf Machine Control: Machine Connection, File, Control, Wizards, Settings, **E-Stop** (Unlock Alarm, Abort).
+- **Positionsanzeige** (DRO, `.drotable`): eine **Achszeile** pro Achse; Klick darauf öffnet das **Achs-Menü**
+  (Set Zero, Goto, Probe); dazu **Koordinatensystem-Knopf** (`#wcsBtn`, G54–G59) und **WCS/MCS-Umschalter** (`#mcsBtn`).
+- **Jog-Bereich** (`#jogcell`): **Pfeiltasten**, **Schrittweite** (0.1/1/10/100 mm), **Jog-Modus**
+  (Incremental/Continuous), Jog-**Stop**, **Override-Regler** (Jog-, Feed-, Spindle-Override: `#jro`, `#fro`, `#tro`).
+- **Arbeitsbereich** (`#controlLogs`) mit den Reitern **3D View**, **Console**, **Macros**, **G-code Editor**.
+- **Statusleiste**: Verbindungs-/Maschinenzustand (`#connectStatus`, `#runStatus`), Job Queue, **Fortschrittsbalken**, Restzeit.
+- **Assistenten**: Dialogfenster über allem (Probe-, Höhenkarten-, Planfräs-Assistent usw.).
+- **Grbl-Settings-Ansicht** (`#grblPanel`) / **Troubleshooting-Ansicht** (`#troubleshootingPanel`) ersetzen
+  Positionsanzeige und Arbeitsbereich, wenn ihr Menüband-Reiter aktiv ist.
+
+Absprachen: „Stop“ immer mit Ort nennen (Stop Job im Menüband, Jog-Stop, Abort im E-Stop).
+„Nullpunkt“ = Werkstück-Nullpunkt (WCS); Maschinen-Nullpunkt ausdrücklich so nennen.
+
 ### Zentrale Zustände (`status` in src/core.js)
 
 - `status.comms.connectionStatus`: 0 = getrennt, 1 = öffnet, 2 = verbunden/idle, 3 = Job läuft,
