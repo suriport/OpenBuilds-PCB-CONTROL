@@ -4,12 +4,16 @@
 // Usage (in the project folder, after `nvm use`):
 //   npx electron-builder --mac dmg --x64 --publish never --config build/pcb-mac-x64.cjs
 // Result: dist-pcb/PCB-Control-<version>.dmg
+// Run `node build/bundle-pcb2gcode.mjs` once before, so pcb2gcode is shipped with the app.
 
 const pkg = require('../package.json');
 
 const config = JSON.parse(JSON.stringify(pkg.build));
 // keep old builds and local drafts out of the app
-config.files = config.files.filter((f) => f !== '').concat(['!dist/**', '!dist-pcb/**', '!pr-drafts/**']);
+config.files = config.files.filter((f) => f !== '').concat(['!dist/**', '!dist-pcb/**', '!pr-drafts/**', '!vendor/**']);
+// pcb2gcode with its libraries and license texts, created by `node build/bundle-pcb2gcode.mjs`
+// (outside of app.asar, programs cannot be started from inside the archive)
+config.extraResources = [{ from: 'vendor/pcb2gcode/mac-x64', to: 'pcb2gcode' }];
 config.extraFiles = []; // the "ssl" folder no longer exists
 config.directories = { output: 'dist-pcb', buildResources: 'build' };
 config.mac.identity = '-'; // ad-hoc signature, no Apple developer account needed

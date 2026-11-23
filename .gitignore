@@ -50,3 +50,6 @@ node_modules
 ##################
 .env
 all.js
+
+# PCB-Control: pcb2gcode bundle, created by build/bundle-pcb2gcode.mjs
+vendor/pcb2gcode/
