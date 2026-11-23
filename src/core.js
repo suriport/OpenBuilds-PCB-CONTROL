@@ -50,6 +50,7 @@ const persistentConfig = {
   spindleDelay: 0,
   enableUpdates: false, // PCB-Control: keine Update-Suche bei GrooveControl ohne Zustimmung
   forceDevMode: false,
+  pcb2gcodePath: "", // PCB-Control: Gerber wizard, empty = search automatically
 };
 
 const configFilePath = path.join(electronApp.getPath('userData'), "config.json");

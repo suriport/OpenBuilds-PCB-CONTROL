@@ -67,6 +67,11 @@ import {
   initUpdate
 } from './update.js';
 
+// PCB-Control
+import {
+  initPcb2gcode
+} from './pcb2gcode.js';
+
 
 // Global variables
 const iconPathW = path.join(rootDir, 'app/icon_w.png');
@@ -604,6 +609,7 @@ function main() {
   initGrblPort();
   initGrblSender();
   initGrblUtilities();
+  initPcb2gcode(); // PCB-Control: Gerber wizard
 
   initUpdate(electronApp.isPackaged);
 
