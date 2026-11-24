@@ -31,7 +31,7 @@
 
     <div class="window bd-black" style="height: 100vh; overflow-y: hidden;">
       <div id="windowtitlebar" class="window-caption bg-black bd-black" style="-webkit-app-region: drag; height: 42px; padding-left: 3px;">
-        <span><img src="./img/groove-control-logo.svg" height="40" /></span>
+        <!-- PCB-Control: Groove Control logo removed -->
         <span class="title" id="windowtitle" style="padding-left: 10px;">PCB-Control</span>
 
         <div class="buttons" style="-webkit-app-region: no-drag">
@@ -465,31 +465,21 @@ The spindle will automatically start when the job is resumed.">
 
             <div class="section" id="section-troubleshooting">
               <div class="group">
-                <button class="ribbon-button" onclick="socket.emit('opengroove', true);">
-                  <span class="icon" style="justify-items:center;">
-                    <img class="light_theme_only" src="./img/groove-logo_b.svg">
-                    <img class="dark_theme_only" src="./img/groove-logo_w.svg">
+                <button class="ribbon-button" onclick="socket.emit('openpcbcontrol');"> <!-- PCB-Control -->
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
                   </span>
-                  <span class="caption">Groove<br>Control</span>
+                  <span class="caption">PCB<br>Control</span>
                 </button>
                 <span class="title">Website</span>
               </div>
 
               <div class="group">
-                <button class="ribbon-button" onclick="socket.emit('openwiki');">
+                <button class="ribbon-button" onclick="socket.emit('openpcbwiki');"> <!-- PCB-Control; Groove Forum removed -->
                   <span class="icon">
                     <i class="fas fa-book"></i>
                   </span>
-                  <span class="caption">Groove<br>Docs</span>
-                </button>
-                <button class="ribbon-button" onclick="socket.emit('openforum');">
-                  <span class="icon">
-                    <span class="fa-layers fa-fw">
-                      <i class="far fa-comment-alt"></i>
-                      <i class="fas fa-question" data-fa-transform="shrink-8 up-1"></i>
-                    </span>
-                  </span>
-                  <span class="caption">Groove<br>Forum</span>
+                  <span class="caption">PCB Control<br>Docs</span>
                 </button>
                 <div>
                   <button class="ribbon-button dropdown-toggle">

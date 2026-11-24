@@ -13,6 +13,11 @@ gepflegter Nachfolger von OpenBuilds CONTROL. Die eigene Maschine läuft mit **G
 - Webserver-Port: zuerst 3020, Fallback 3000/3200/3220, Override via `GROOVE_WEB_PORT`.
 - Es gibt **keine automatisierten Tests** – Änderungen müssen manuell in der App geprüft werden
   (wenn möglich ohne angeschlossene Maschine oder mit gesicherter Maschine / ohne Werkzeug).
+- **Testaufbau am Entwicklungs-iMac:** An `/dev/tty.usbserial-1440` hängt keine echte Maschine, sondern
+  eine Grbl-Steuerung, die die Schrittmotor-Signale über LEDs anzeigt; Endschalter werden von Hand
+  ausgelöst. Hier darf Claude die App selbst starten, verbinden und Befehle (Jog, Jobs, Stop, Alarm)
+  testen – es kann nichts beschädigt werden. Die Sicherheitsregel für Code-Änderungen gilt trotzdem,
+  denn derselbe Code läuft später an der echten Maschine.
 - Statische Analyse: ESLint (`eslint.config.mjs`, `eslint_src.bat` / `eslint_app.bat`).
 - Die App erlaubt nur **eine Instanz**. Läuft schon eine (auch eine alte), beendet sich ein neuer Start
   sofort und still. Vor dem Testen prüfen, welche Instanz läuft.
@@ -26,6 +31,9 @@ gepflegter Nachfolger von OpenBuilds CONTROL. Die eigene Maschine läuft mit **G
   ändern, damit Merges konfliktarm bleiben.
 - Eigene Abweichungen von GrooveControl: Name „PCB-Control“ (sichtbare Stellen, `package.json`),
   Update-Suche standardmäßig aus (`enableUpdates: false` in `src/core.js`).
+  Kein Groove-Control-Logo in der Titelleiste; Help & Troubleshooting → Website „PCB Control“ und
+  Support „PCB Control Docs“ führen zum eigenen GitHub-Repo bzw. Wiki (`openpcbcontrol`, `openpcbwiki`
+  in `src/main.js`), „Groove Forum“ entfernt.
   `APP_NAME` in `app/js/main.js` bleibt bewusst „Groove Control“ (Makros prüfen darauf).
 
 ## Architektur

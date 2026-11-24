@@ -505,6 +505,15 @@ function onConnection(socket) {
     shell.openExternal('https://github.com/OpenBuilds/OpenBuilds-CAM')
   });
 
+  // PCB-Control: own GitHub page and wiki (Help & Troubleshooting -> Website / Support)
+  socket.on('openpcbcontrol', function() {
+    shell.openExternal('https://github.com/suriport/OpenBuilds-PCB-CONTROL')
+  });
+
+  socket.on('openpcbwiki', function() {
+    shell.openExternal('https://github.com/suriport/OpenBuilds-PCB-CONTROL/wiki')
+  });
+
   socket.on('openwiki', function() {
     shell.openExternal('https://github.com/ivomirb/GrooveControl/wiki')
   });
