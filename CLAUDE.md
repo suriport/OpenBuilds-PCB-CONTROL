@@ -142,6 +142,9 @@ Im Zweifel nachfragen statt annehmen.
 ## Bekannte Eigenheiten
 
 - Viel globaler Zustand und mehrere Timer-Loops (z. B. `statusTick` in `src/grblSender.js`).
+- Firmware-Anzeige (Help & Troubleshooting → Communications): „gnea“ ist der interne Plattformname für
+  normales Grbl (`handleGreeting()`), Version und Datum kommen aus `$I` (`parseVersion()`). Die LED-Teststeuerung
+  meldet sich als „Grbl 1.1hLaser“ / `[VER:1.1hLaser.20260721:]` – das ist kein Fehler. Bewusst so gelassen.
 - `UsefulMacros/` enthält Makros von GrooveControl, `BACKUPS OF MACROS FROM FORUM/` nur archivierte Makros –
   beides kein App-Code.
 - Der frühere Stand auf Basis von OpenBuilds CONTROL v1.0.390 liegt im Branch `master` (bis zur Umstellung).
