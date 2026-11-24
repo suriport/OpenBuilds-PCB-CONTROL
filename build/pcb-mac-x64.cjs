@@ -16,6 +16,10 @@ config.files = config.files.filter((f) => f !== '').concat(['!dist/**', '!dist-p
 config.extraResources = [{ from: 'vendor/pcb2gcode/mac-x64', to: 'pcb2gcode' }];
 config.extraFiles = []; // the "ssl" folder no longer exists
 config.directories = { output: 'dist-pcb', buildResources: 'build' };
+// PCB-Control app icon (build/pcb/icon.icns, made from the PCB-Control icon image)
+config.icon = 'build/pcb/icon.icns';
+config.mac.icon = 'build/pcb/icon.icns';
+if (config.dmg) config.dmg.icon = 'build/pcb/icon.icns';
 config.mac.identity = '-'; // ad-hoc signature, no Apple developer account needed
 config.publish = null;
 

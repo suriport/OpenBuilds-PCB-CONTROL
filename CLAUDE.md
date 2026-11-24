@@ -34,6 +34,9 @@ gepflegter Nachfolger von OpenBuilds CONTROL. Die eigene Maschine läuft mit **G
   Kein Groove-Control-Logo in der Titelleiste; Help & Troubleshooting → Website „PCB Control“ und
   Support „PCB Control Docs“ führen zum eigenen GitHub-Repo bzw. Wiki (`openpcbcontrol`, `openpcbwiki`
   in `src/main.js`), „Groove Forum“ entfernt.
+  Startbild mit PCB-Control-Logo (`app/js/pcb/splash.js` ersetzt `initSplash`/`animateSplash` aus
+  `app/js/main.js`, muss danach eingebunden sein; Bild `app/img/pcb/pcb-control-logo.png`).
+  App-Icon `build/pcb/icon.icns`/`.ico`/`.png`, nur in `build/pcb-mac-x64.cjs` gesetzt (`package.json` unverändert).
   `APP_NAME` in `app/js/main.js` bleibt bewusst „Groove Control“ (Makros prüfen darauf).
 
 ## Architektur
