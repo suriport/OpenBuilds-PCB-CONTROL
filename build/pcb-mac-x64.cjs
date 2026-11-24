@@ -20,6 +20,8 @@ config.directories = { output: 'dist-pcb', buildResources: 'build' };
 config.icon = 'build/pcb/icon.icns';
 config.mac.icon = 'build/pcb/icon.icns';
 if (config.dmg) config.dmg.icon = 'build/pcb/icon.icns';
+// shown in the macOS "Get Info" window (otherwise built from "author" in package.json)
+config.copyright = 'Copyright © ' + new Date().getFullYear() + ' github.com/suriport/OpenBuilds-PCB-CONTROL';
 config.mac.identity = '-'; // ad-hoc signature, no Apple developer account needed
 config.publish = null;
 
