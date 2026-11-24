@@ -1,0 +1,7 @@
+/* PCB-Control: light start screen (splash) that matches the background of the PCB-Control logo.
+   Overrides the black background from app/css/splash.css, main.css and the themes, so the window
+   does not show a black screen before the logo. See app/js/pcb/splash.js. */
+#splash,
+.theme_hicontrast #splash {
+  background: #fcfcfc !important;
+}
