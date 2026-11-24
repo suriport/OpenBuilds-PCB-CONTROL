@@ -1,6 +1,6 @@
 // update.js initialzies handles the auto update feature
 
-const MAX_CHANGELOG_LINES = 16;
+const MAX_CHANGELOG_LINES = 40; // PCB-Control: was 16, room for the PCB-Control entry above v1.0.0
 
 // System dependencies
 import fs from 'fs';
@@ -41,7 +41,7 @@ function createAutoUpdater(isPackaged) {
 
   if (!isPackaged) {
     autoUpdater.forceDevUpdateConfig = true;
-    autoUpdater.setFeedURL({provider: "github", owner: "ivomirb", repo: "GrooveControl"});
+    autoUpdater.setFeedURL({provider: "github", owner: "suriport", repo: "OpenBuilds-PCB-CONTROL"}); // PCB-Control
   }
 
   autoUpdater.on('update-available', (info) => {
@@ -90,7 +90,7 @@ function createAutoUpdater(isPackaged) {
 
 function onConnection(socket) {
   socket.on('openUpdatePage', function() {
-    shell.openExternal("https://github.com/ivomirb/GrooveControl/releases/latest");
+    shell.openExternal("https://github.com/suriport/OpenBuilds-PCB-CONTROL/releases/latest"); // PCB-Control
   });
 
   socket.on('cancelUpdate', function() {

@@ -1,3 +1,15 @@
+v1.1.0
+
+PCB-Control is a fork of Groove Control (github.com/ivomirb/GrooveControl),
+adapted for milling printed circuit boards. It keeps all features of Groove Control, plus
+* Gerber to G-code wizard using pcb2gcode (included in the macOS app)
+* Webcam tab with crosshair, rotate, mirror, zoom and Set Cam Zero X/Y
+* Protection against access from foreign web pages
+* Own tooltips and file dialog without filters on macOS
+* Invalid jog override values are ignored
+* PCB-Control logo, app icon, links to the PCB-Control repository and wiki
+* Update check uses the PCB-Control releases
+
 v1.0.0
 
 This is the first release of Groove Control.

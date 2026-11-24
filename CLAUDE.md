@@ -30,7 +30,9 @@ gepflegter Nachfolger von OpenBuilds CONTROL. Die eigene Maschine läuft mit **G
 - Eigene Änderungen möglichst in **eigene Dateien** legen und in GrooveControl-Dateien nur das Nötigste
   ändern, damit Merges konfliktarm bleiben.
 - Eigene Abweichungen von GrooveControl: Name „PCB-Control“ (sichtbare Stellen, `package.json`),
-  Update-Suche standardmäßig aus (`enableUpdates: false` in `src/core.js`).
+  Update-Suche standardmäßig aus (`enableUpdates: false` in `src/core.js`); sie sucht in den GitHub-Releases
+  von suriport/OpenBuilds-PCB-CONTROL (`src/update.js`, `app/js/updates.js`, `publish` in `build/pcb-mac-x64.cjs`).
+  „What's new in this version“ kommt aus `CHANGELOG.txt` (oberster Eintrag = aktuelle Version).
   Kein Groove-Control-Logo in der Titelleiste; Help & Troubleshooting → Website „PCB Control“ und
   Support „PCB Control Docs“ führen zum eigenen GitHub-Repo bzw. Wiki (`openpcbcontrol`, `openpcbwiki`
   in `src/main.js`), „Groove Forum“ entfernt.

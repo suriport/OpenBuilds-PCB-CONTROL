@@ -1,6 +1,6 @@
 {
   "name": "pcb-control",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "GPL-3.0",
   "description": "PCB-Control G-code Sender for PCB milling (based on GrooveControl)",
   "author": "github.com/ivomirb <cnc@ibeltchev.com>",

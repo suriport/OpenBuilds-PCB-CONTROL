@@ -23,6 +23,7 @@ if (config.dmg) config.dmg.icon = 'build/pcb/icon.icns';
 // shown in the macOS "Get Info" window (otherwise built from "author" in package.json)
 config.copyright = 'Copyright © ' + new Date().getFullYear() + ' github.com/suriport/OpenBuilds-PCB-CONTROL';
 config.mac.identity = '-'; // ad-hoc signature, no Apple developer account needed
-config.publish = null;
+// where the update check looks (written into app-update.yml); the build itself uploads nothing (--publish never)
+config.publish = [{ provider: 'github', owner: 'suriport', repo: 'OpenBuilds-PCB-CONTROL', vPrefixedTagName: true }];
 
 module.exports = config;

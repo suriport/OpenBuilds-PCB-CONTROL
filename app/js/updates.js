@@ -1,7 +1,7 @@
 "use strict";
 
 function getReleaseStats() {
-  const url = "https://api.github.com/repos/ivomirb/GrooveControl/releases/latest";
+  const url = "https://api.github.com/repos/suriport/OpenBuilds-PCB-CONTROL/releases/latest"; // PCB-Control
   $.getJSON(url, function(data) {
 
     let downloadCount = 0;
@@ -109,7 +109,7 @@ function onUpdateAvailable(info) {
 
   let template = `
   <div class="dialog-content">
-    A new version ` + info.version + ` of Groove Control is available for download.<br>
+    A new version ` + info.version + ` of PCB-Control is available for download.<br>
     <h6>What's new since v` + laststatus.driver.version + `</h6>
     <div class="text-small bd-openbuilds" style="max-height:300px; overflow-y:auto; padding:2px 10px; border:solid 1px;">
     <style>p { margin-top: 5px; }</style>
