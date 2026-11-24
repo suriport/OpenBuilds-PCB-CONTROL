@@ -1,3 +1,47 @@
+<p align="center"><img src="app/img/pcb/pcb-control-logo.png" alt="PCB-Control" width="400"></p>
+
+**PCB-Control** is a G-code sender for CNC machines running Grbl, grblHAL and FluidNC
+(USB serial or Telnet/WiFi), adapted for **milling printed circuit boards**.
+
+It is a fork of [Groove Control](https://github.com/ivomirb/GrooveControl) by Ivo Beltchev, the spiritual
+successor of OpenBuilds CONTROL. PCB-Control keeps all features of Groove Control (described further below)
+and adds tools for making PCBs.
+
+> ⚠️ PCB-Control controls a real machine with a spinning tool. Always try new features first
+> without a tool, with Z raised and a hand on the emergency stop.
+
+## Download
+
+**Current version: PCB-Control 1.1.0** – [Latest Release](https://github.com/suriport/OpenBuilds-PCB-CONTROL/releases/latest) ·
+[All Releases](https://github.com/suriport/OpenBuilds-PCB-CONTROL/releases)
+
+* `PCB-Control-1.1.0.dmg` – macOS, Intel (x64), pcb2gcode included.
+* The app is only ad-hoc signed and not notarized: open it the first time with right-click → *Open*.
+* There are no Windows or Linux builds of PCB-Control yet; they can be built from source (see *Building Groove Control* below).
+* The update check on startup is off by default. Turn it on in Settings → *Check for updates on startup*;
+  it looks at the PCB-Control releases.
+
+## What PCB-Control adds
+
+* **Gerber to G-code wizard** – converts Gerber and drill files into G-code with pcb2gcode
+  (Ribbon → Wizards & Tools)
+* **Camera tab** – webcam image with crosshair, rotate, mirror, zoom, and *Set Cam Zero X/Y* to set the work zero
+  with the camera (turn on in Settings → Hardware)
+* **Access protection** – foreign web pages cannot send commands to the machine through the built-in web server
+* **macOS fixes** – own tooltips, file dialog without filters
+* **Jog override** – invalid values are ignored
+* **PCB-Control identity** – logo, app icon, links to this repository and its wiki
+
+## Documentation
+
+The [Wiki](https://github.com/suriport/OpenBuilds-PCB-CONTROL/wiki) describes every change compared with
+Groove Control, in German and English: usage of the new features, building the macOS app, merging updates
+from Groove Control, and a FAQ.
+
+---
+
+*The rest of this page is the original README of Groove Control.*
+
 ![Groove Control](docs/groove-control-logo.png)
 
 Groove Control is a G-code sender software for CNC machines running Grbl, GrblHAL, and FluidNC.
