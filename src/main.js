@@ -74,8 +74,9 @@ import {
 
 
 // Global variables
-const iconPathW = path.join(rootDir, 'app/icon_w.png');
-const iconPathB = path.join(rootDir, 'app/icon_b.png');
+// PCB-Control: own tray/window icons (made from the PCB-Control app icon)
+const iconPathW = path.join(rootDir, 'app/img/pcb/tray_w.png');
+const iconPathB = path.join(rootDir, 'app/img/pcb/tray_b.png');
 
 var devMode = false;
 var safeMode = false;
@@ -252,7 +253,7 @@ function createTrayIcon() {
       click: showJogWindow
     },
     {
-      label: 'Quit Groove Control',
+      label: 'Quit PCB-Control', // PCB-Control
       click: exitApp
     }];
     if (process.platform == 'win32' || process.platform == 'linux') {
@@ -288,13 +289,13 @@ function createTrayIcon() {
     if (appIcon) {
       appIcon.displayBalloon({
         icon: nativeImage.createFromPath(iconPathW),
-        title: "Groove Control Started",
-        content: "Groove Control has started successfully"
+        title: "PCB-Control Started", // PCB-Control
+        content: "PCB-Control has started successfully"
       })
     }
   } else { // darwin
     const dockMenu = Menu.buildFromTemplate([{
-      label: 'Quit Groove Control',
+      label: 'Quit PCB-Control', // PCB-Control
       click() {
         electronApp.exit(0);
       }
@@ -512,6 +513,10 @@ function onConnection(socket) {
 
   socket.on('openpcbwiki', function() {
     shell.openExternal('https://github.com/suriport/OpenBuilds-PCB-CONTROL/wiki')
+  });
+  // PCB-Control: heightmap documentation in the PCB-Control wiki (3D View -> Heightmap -> Documentation)
+  socket.on('openpcbheightmap', function() {
+    shell.openExternal('https://github.com/suriport/OpenBuilds-PCB-CONTROL/wiki/H%C3%B6henkarte')
   });
 
   socket.on('openwiki', function() {
