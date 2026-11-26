@@ -59,7 +59,6 @@ const appSettingsDlg = `
   <li><a id="mainSettingsTab" href="#mainSettings" style="font-size:14px;"><i class="fas fa-sliders-h"></i> Main</a></li>
   <li><a id="keyboardSettingsTab" href="#keyboardSettings" style="font-size:14px;"><i class="fas fa-keyboard"></i> Keyboard</a></li>
 <!--  <li><a id="gamepadSettingsTab" href="#gamepadSettings" style="font-size:14px;"><i class="fas fa-gamepad"></i> Gamepad</a></li> -->
-  <li><a id="rotarySettingsTab" href="#rotarySettings" style="font-size:14px;"><i class="fab fa-ubuntu"></i> Rotary</a></li>
   ${window.pcbHardwareSettingsTab || ''}<!-- PCB-Control: app/js/pcb/camera.js -->
 <!--  <li><a id="toolchangeSettingsTab" href="#toolchangeSettings" style="font-size:14px;"><i class="fas fa-tools"></i> Toolchange</a></li> -->
 </ul>
@@ -193,13 +192,6 @@ The animation is smoother at the expense of some accuracy and a small lag of aro
 <!--<div class="section" id="gamepadSettings" style="height:500px; flex-direction:column; border-bottom: 0px;">
 </div> -->
 
-<div class="section" id="rotarySettings" style="height:500px; flex-direction:column; border-bottom: 0px;">
-  <div style="display:flex;">
-    <input type="checkbox" data-role="checkbox" data-style="2" data-caption="Hide 4th Axis Controls" id="disable4thAxisCheck" />
-    <span class="far fa-question-circle ml-1 mt-2" title="Hide the 4th axis controls if the controller supports a 4th axis but it is not currently in use"></span>
-  </div>
-</div>
-
 <!--<div class="section" id="toolchangeSettings" style="height:500px; flex-direction:column; border-bottom:0px;">
 </div> -->
 
@@ -238,7 +230,7 @@ function applyAppSettings() {
   }
   socket.emit('enableUpdates', $('#enableUpdatesCheck').prop('checked'));
 
-  disable4thAxis = $('#disable4thAxisCheck').prop('checked');
+  disable4thAxis = !$('#enable4thAxisCheck').prop('checked'); // PCB-Control: checkbox on the Hardware tab
   localStorage.setItem('disable4thAxis', disable4thAxis);
   updateWcsHistory();
 
@@ -332,7 +324,7 @@ function showAppSettings(category) {
   $('#disableZDist100Check').prop('checked', disableZDist100);
   $('#disableZContCheck').prop('checked', disableZCont);
 
-  $('#disable4thAxisCheck').prop('checked', disable4thAxis);
+  $('#enable4thAxisCheck').prop('checked', !disable4thAxis);
 
   initKeyboardEditor();
 

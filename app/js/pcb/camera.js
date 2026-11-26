@@ -61,6 +61,14 @@ Used later to set the XY zero with the camera."></span></label>
       </div>
     </div>
   </div>
+
+  <hr class="mt-4 mb-2" style="width:100%;"/>
+
+  <!-- read and saved by app/js/settings.js -->
+  <div class="row mt-2" style="margin-left:-4px; font-weight:700;">
+    <input type="checkbox" data-role="checkbox" data-style="2" data-caption="Enable 4th Axis Controls" id="enable4thAxisCheck"/>
+    <span class="far fa-question-circle ml-1 mt-2" title="Shows the 4th axis controls if the controller supports a 4th axis. Switch off if the axis is not in use."></span>
+  </div>
 </div>`;
 
 function pcbCamLoadSettings() {

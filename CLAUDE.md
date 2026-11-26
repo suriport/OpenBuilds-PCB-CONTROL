@@ -35,6 +35,9 @@ gepflegter Nachfolger von OpenBuilds CONTROL.
   `app/js/main.js`, muss danach eingebunden sein; Bild `app/img/pcb/pcb-control-logo.png`).
   App-Icon `build/pcb/icon.icns`/`.ico`/`.png`, nur in `build/pcb-mac-x64.cjs` gesetzt (`package.json` unverändert).
   `APP_NAME` in `app/js/main.js` bleibt bewusst „Groove Control“ (Makros prüfen darauf).
+  Menüband → Settings → More: „Hardware Settings“ statt „Rotary Settings“ (`app/main.html`).
+  Reiter „Rotary“ im Settings-Fenster entfernt (`app/js/settings.js`); seine Einstellung steht unter „Hardware“
+  als „Enable 4th Axis Controls“ (HTML in `app/js/pcb/camera.js`, gespeichert weiter als `disable4thAxis`).
 
 ## Architektur
 
