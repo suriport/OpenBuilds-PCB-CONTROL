@@ -3,7 +3,7 @@
 **PCB-Control** – Electron-Host-Software für CNC-Maschinen mit Grbl / grblHAL / FluidNC
 (USB-Seriell oder Telnet/WLAN), für das Fräsen von Leiterplatten.
 Basis ist [GrooveControl](https://github.com/ivomirb/GrooveControl) (Remote `groove`), ein aktiv
-gepflegter Nachfolger von OpenBuilds CONTROL. Die eigene Maschine läuft mit **Grbl 1.1h** (128-Byte-RX-Puffer).
+gepflegter Nachfolger von OpenBuilds CONTROL.
 
 ## Entwicklung
 
@@ -13,11 +13,6 @@ gepflegter Nachfolger von OpenBuilds CONTROL. Die eigene Maschine läuft mit **G
 - Webserver-Port: zuerst 3020, Fallback 3000/3200/3220, Override via `GROOVE_WEB_PORT`.
 - Es gibt **keine automatisierten Tests** – Änderungen müssen manuell in der App geprüft werden
   (wenn möglich ohne angeschlossene Maschine oder mit gesicherter Maschine / ohne Werkzeug).
-- **Testaufbau am Entwicklungs-iMac:** An `/dev/tty.usbserial-1440` hängt keine echte Maschine, sondern
-  eine Grbl-Steuerung, die die Schrittmotor-Signale über LEDs anzeigt; Endschalter werden von Hand
-  ausgelöst. Hier darf Claude die App selbst starten, verbinden und Befehle (Jog, Jobs, Stop, Alarm)
-  testen – es kann nichts beschädigt werden. Die Sicherheitsregel für Code-Änderungen gilt trotzdem,
-  denn derselbe Code läuft später an der echten Maschine.
 - Statische Analyse: ESLint (`eslint.config.mjs`, `eslint_src.bat` / `eslint_app.bat`).
 - Die App erlaubt nur **eine Instanz**. Läuft schon eine (auch eine alte), beendet sich ein neuer Start
   sofort und still. Vor dem Testen prüfen, welche Instanz läuft.
@@ -148,8 +143,6 @@ Im Zweifel nachfragen statt annehmen.
 
 - Viel globaler Zustand und mehrere Timer-Loops (z. B. `statusTick` in `src/grblSender.js`).
 - Firmware-Anzeige (Help & Troubleshooting → Communications): „gnea“ ist der interne Plattformname für
-  normales Grbl (`handleGreeting()`), Version und Datum kommen aus `$I` (`parseVersion()`). Die LED-Teststeuerung
-  meldet sich als „Grbl 1.1hLaser“ / `[VER:1.1hLaser.20260721:]` – das ist kein Fehler. Bewusst so gelassen.
+  normales Grbl (`handleGreeting()`), Version und Datum kommen aus `$I` (`parseVersion()`). Bewusst so gelassen.
 - `UsefulMacros/` enthält Makros von GrooveControl, `BACKUPS OF MACROS FROM FORUM/` nur archivierte Makros –
   beides kein App-Code.
-- Der frühere Stand auf Basis von OpenBuilds CONTROL v1.0.390 liegt im Branch `master` (bis zur Umstellung).

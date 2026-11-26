@@ -53,3 +53,6 @@ all.js
 
 # PCB-Control: pcb2gcode bundle, created by build/bundle-pcb2gcode.mjs
 vendor/pcb2gcode/
+
+# Claude Code: personal project notes
+CLAUDE.local.md
