@@ -1,3 +1,9 @@
+v1.1.1
+
+* The 4th axis setting moved to the Hardware settings tab, the Rotary tab was removed
+* PCB-Control tray icons, quit label and heightmap documentation link
+* README with introduction, download and documentation
+
 v1.1.0
 
 PCB-Control is a fork of Groove Control (github.com/ivomirb/GrooveControl),
